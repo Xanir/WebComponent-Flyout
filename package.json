@@ -1,0 +1,23 @@
+{
+	"name": "nz-flyout",
+	"description": "A Web Component flyout/popover with precise positioning control.",
+	"version": "0.1.0",
+	"homepage": "https://github.com/EnzeyNet/WebComponent-Flyout",
+	"bugs": "https://github.com/EnzeyNet/WebComponent-Flyout/issues",
+	"author": {
+		"name": "Enzey",
+		"email": "enzey@enzey.net",
+		"url": "https://github.com/Xanir"
+	},
+	"scripts": {
+		"build": "rollup --config rollup.config.mjs",
+		"watch": "rollup --config rollup.config.mjs --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/EnzeyNet/WebComponent-Flyout.git"
+	},
+	"devDependencies": {
+		"rollup": "^4.60.1"
+	}
+}
