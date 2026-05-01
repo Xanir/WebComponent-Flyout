@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>nz-flyout Live Test</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 60px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 80px;
+		}
+
+		h2 {
+			margin: 0 0 12px;
+			font-size: 14px;
+			color: #555;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+
+		.demo-row {
+			display: flex;
+			gap: 60px;
+			align-items: flex-start;
+			flex-wrap: wrap;
+		}
+
+		/* The element that is used as the positioning anchor */
+		.flyout-against {
+			display: inline-block;
+		}
+
+		button {
+			padding: 8px 16px;
+			cursor: pointer;
+			font-size: 14px;
+		}
+
+		/* Flyout content styling */
+		nz-flyout {
+			display: none;
+		}
+
+		.flyout-panel {
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+			padding: 12px 16px;
+			min-width: 160px;
+			font-size: 14px;
+            margin: 10px;
+		}
+
+		.flyout-panel ul {
+			margin: 0;
+			padding: 0 0 0 16px;
+		}
+
+		.flyout-panel ul li {
+			margin: 4px 0;
+		}
+	</style>
+</head>
+<body>
+
+	<h1 style="margin:0">nz-flyout — Live Tests</h1>
+
+	<!-- Example 1: Click, flyout below-left aligned to anchor -->
+	<section>
+		<h2>1. Click — flyout top-left aligns to anchor bottom-left</h2>
+		<div class="demo-row">
+			<span class="flyout-anchor">
+				<button>Open Menu (click)</button>
+				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+					<div class="flyout-panel">
+						<ul>
+							<li>Item One</li>
+							<li>Item Two</li>
+							<li>Item Three</li>
+						</ul>
+					</div>
+				</nz-flyout>
+			</span>
+		</div>
+	</section>
+
+	<!-- Example 2: Hover, flyout below-center aligned to anchor -->
+	<section>
+		<h2>2. Hover — flyout top-center aligns to anchor bottom-center</h2>
+		<div class="demo-row">
+			<span class="flyout-anchor">
+				<button>Hover Me</button>
+				<nz-flyout flyout-on="hover" align-my="top center" align-to="bottom center">
+					<div class="flyout-panel">
+						Tooltip content here.
+					</div>
+				</nz-flyout>
+			</span>
+		</div>
+	</section>
+
+	<!-- Example 3: Click, flyout to the right of the button -->
+	<section>
+		<h2>3. Click — flyout left-top aligns to anchor right-top</h2>
+		<div class="demo-row">
+			<span class="flyout-anchor">
+				<button>Open Right Panel (click)</button>
+				<nz-flyout flyout-on="click" align-my="top left" align-to="top right">
+					<div class="flyout-panel">
+						<strong>Side Panel</strong>
+						<p style="margin:8px 0 0">Content to the right.</p>
+					</div>
+				</nz-flyout>
+			</span>
+		</div>
+	</section>
+
+	<!-- Example 4: Hover, flyout above the button -->
+	<section>
+		<h2>4. Hover — flyout bottom-center aligns to anchor top-center</h2>
+		<div class="demo-row">
+			<span class="flyout-anchor">
+				<button>Hover for Tooltip Above</button>
+				<nz-flyout flyout-on="hover" align-my="bottom center" align-to="top center">
+					<div class="flyout-panel">
+						I appear above.
+					</div>
+				</nz-flyout>
+			</span>
+		</div>
+	</section>
+
+	<!-- Example 5: Click, multiple flyouts on the page independently -->
+	<section>
+		<h2>5. Multiple independent flyouts</h2>
+		<div class="demo-row">
+			<span class="flyout-anchor">
+				<button>Menu A (click)</button>
+				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+					<div class="flyout-panel">Menu A content</div>
+				</nz-flyout>
+			</span>
+			<span class="flyout-anchor">
+				<button>Menu B (click)</button>
+				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+					<div class="flyout-panel">Menu B content</div>
+				</nz-flyout>
+			</span>
+			<span class="flyout-anchor">
+				<button>Menu C (click)</button>
+				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+					<div class="flyout-panel">Menu C content</div>
+				</nz-flyout>
+			</span>
+		</div>
+	</section>
+
+	<script src="dist/nz-flyout.js"></script>
+</body>
+</html>
