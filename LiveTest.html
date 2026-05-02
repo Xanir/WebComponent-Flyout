@@ -82,6 +82,20 @@
 		.flyout-panel ul li {
 			margin: 4px 0;
 		}
+
+		.info-icon {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background: #007bff;
+			color: #fff;
+			text-align: center;
+			line-height: 16px;
+			font-size: 12px;
+			font-weight: bold;
+		}
+
 	</style>
 	<script>
 		function setAllHover() {
@@ -126,7 +140,8 @@
 			<div></div>
 		</div>
 	</section>
-	<section>`
+
+	<section>
 		<div class="examples-row">
 			<div></div>
 			<h2>Click — flyout examples</h2>
@@ -404,6 +419,39 @@
 							<div><code>align-to="bottom center"</code></div>
 						</div>
 					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="examples-row">
+			<div></div>
+			<h2>Multiple Flyouts sharing the same anchor on a higher level parent</h2>
+			<div></div>
+		</div>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div flyout-anchor style="background-color:lightsteelblue; padding: 10px;">
+				<div style="border: #555;">
+					<div class="info-icon" style="background-color: #007bff;">
+						<nz-flyout flyout-on="click" align-my="bottom left" align-to="top left">
+							<div class="flyout-panel" style="background-color: #007bff;color:ivory">Blue</div>
+						</nz-flyout>
+					</div>
+					<div class="info-icon" style="background-color:forestgreen">
+						<nz-flyout flyout-on="click" align-my="bottom left" align-to="top left">
+						<div class="flyout-panel" style="background-color: forestgreen;color:ivory">Green</div>
+						</nz-flyout>
+					</div>
+					<div class="info-icon" style="background-color:blueviolet;">
+						<nz-flyout flyout-on="click" align-my="bottom left" align-to="top left">
+							<div class="flyout-panel" style="background-color: blueviolet;color:ivory">Blueviolet</div>
+						</nz-flyout>
+					</div>
 				</div>
 			</div>
 			<div>
