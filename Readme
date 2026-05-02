@@ -1,1 +1,132 @@
-A Web Component that acts similar to a html popover but give more control as to positioning and auto repositioning.
+# nz-flyout
+
+A Web Component that acts similar to a HTML popover but gives more control over positioning and auto repositioning.
+
+**Live demo:** https://xanir.github.io/WebComponent-Flyout/
+
+---
+
+## Usage
+
+Include the built script and place `<nz-flyout>` inside the element that should act as the trigger. Nest your flyout content as children of the component.
+
+```html
+<script src="dist/nz-flyout.js"></script>
+
+<span class="flyout-anchor">
+  <button>Open Menu</button>
+  <nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+    <div class="flyout-panel">
+      <ul>
+        <li>Item One</li>
+        <li>Item Two</li>
+      </ul>
+    </div>
+  </nz-flyout>
+</span>
+
+---
+
+## Attributes
+
+### `flyout-on`
+
+Defines what user action opens the flyout.
+
+| Value     | Description                                               |
+|-----------|-----------------------------------------------------------|
+| `click`   | Opens on click of the parent element; closes on click outside the flyout |
+| `hover`   | Opens on mouseover of the parent element; closes when the pointer leaves the convex hull of the anchor and flyout |
+
+This attribute is observed — changing it at runtime re-binds the opener accordingly.
+
+---
+
+### `align-my`
+
+Defines which point of the **flyout** is used as its anchor point for positioning.
+
+Format: `"<vertical> <horizontal>"`
+
+| Vertical values | Horizontal values |
+|-----------------|-------------------|
+| `top`           | `left`            |
+| `center`        | `center`          |
+| `bottom`        | `right`           |
+
+Example: `align-my="top left"` — the top-left corner of the flyout is used as its position origin.
+
+---
+
+### `align-to`
+
+Defines which point of the **anchor element** the flyout aligns to.
+
+Format: `"<vertical> <horizontal>"` — same valid values as `align-my`.
+
+Example: `align-to="bottom left"` — the flyout origin is aligned to the bottom-left corner of the anchor element.
+
+**Combined example** — flyout appears below-left of the button:
+
+```html
+<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+```
+
+---
+
+## Anchor Element
+
+The flyout positions itself relative to the nearest ancestor element that has the class `flyout-anchor`, the attribute `flyout-anchor`, or the attribute `data-flyout-anchor`. If no such ancestor is found, the direct parent element is used as the anchor.
+
+```html
+<!-- Explicit anchor -->
+<span class="flyout-anchor">
+  <button>Trigger</button>
+  <nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+    ...
+  </nz-flyout>
+</span>
+```
+
+---
+
+## How It Works
+
+### Component Lifecycle and Event Flow
+
+**1. Creation**
+
+When the browser parses `<nz-flyout>`, the `NzFlyout` custom element is instantiated. During construction the inner HTML (the flyout content) is captured as a template string and the element's own inner HTML is cleared. Opener action listeners are then bound based on the current `flyout-on` attribute value.
+
+**2. Opener Event Binding**
+
+Depending on `flyout-on`, either a `click` or `mouseover` listener is attached to the component's parent element. This listener waits for the user to trigger the flyout.
+
+**3. Trigger Action (click / hover)**
+
+When the bound event fires, the opener listeners are immediately removed (preventing double-opens), and `displayFlyout()` is called.
+
+**4. Flyout Display**
+
+On the next animation frame a `<div>` container is created, populated with the previously captured template HTML, and appended to `document.body` with `position: fixed`. Then `align-my` and `align-to` attributes are resolved against the bounding boxes of the flyout container and the anchor element, and the computed `top`/`left` values are applied, making the container visible.
+
+All scrollable ancestor elements are also discovered and registered at this point. While the flyout is open, any scroll event re-triggers the positioning calculation so the flyout tracks its anchor.
+
+**5. Closure Event Binding**
+
+After the flyout is displayed, a global document-level listener is registered:
+- `click` mode — listens for a `click` event anywhere in the document.
+- `hover` mode — listens for `mousemove` events on the document (throttled to ~95 ms intervals).
+
+**6. Flyout Removal**
+
+- **Click mode**: if the click target falls outside the flyout container's bounding box, `close()` is called.
+- **Hover mode**: the convex hull wrapping both the anchor element and the flyout container is computed. If the pointer moves outside this hull, `close()` is called.
+
+`close()` removes the flyout container from the DOM, unbinds all scroll listeners, removes the global closure listener (if no other flyouts are active), and re-binds the opener action so the flyout can be triggered again.
+
+---
+
+## Multiple Flyouts
+
+Multiple `<nz-flyout>` components on the same page work independently. The global closure listeners are shared and only active while at least one flyout is open, and are removed automatically once all flyouts have closed.
