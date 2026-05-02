@@ -36,6 +36,7 @@ jobs:
       - name: Prepare deploy directory
         run: |
           mkdir -p _site
+          mkdir -p _site/dist
           cp dist/nz-flyout.js _site/dist/nz-flyout.js
           cp LiveTest.html _site/index.html
 
