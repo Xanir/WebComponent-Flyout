@@ -36,7 +36,7 @@ jobs:
       - name: Prepare deploy directory
         run: |
           mkdir -p _site
-          cp dist/nz-flyout.js _site/nz-flyout.js
+          cp dist/nz-flyout.js _site/dist/nz-flyout.js
           cp LiveTest.html _site/index.html
 
       - name: Upload Pages artifact
