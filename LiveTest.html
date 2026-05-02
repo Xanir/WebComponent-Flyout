@@ -21,27 +21,47 @@
 			letter-spacing: 0.05em;
 		}
 
-		.demo-row {
-			display: flex;
-			gap: 60px;
-			align-items: flex-start;
-			flex-wrap: wrap;
-		}
-
-		/* The element that is used as the positioning anchor */
-		.flyout-against {
-			display: inline-block;
-		}
-
 		button {
 			padding: 8px 16px;
 			cursor: pointer;
 			font-size: 14px;
 		}
 
-		/* Flyout content styling */
-		nz-flyout {
-			display: none;
+		/* Examples layout */
+
+		.examples-row {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			align-items: center;
+			gap: 40px;
+		}
+		.examples-row > * {
+			flex: 1 1 auto;
+			justify-content: center;
+			display: flex;
+			justify-items: center;
+			margin: 30px 0;
+		}
+		.examples-row > *:first-child {
+			flex: 0 0 20%;
+			justify-content: center;
+		}
+		.examples-row > *:last-child {
+			flex: 0 0 20%;
+			justify-content: center;
+		}
+
+		.clickable {
+			display: inline-block;
+			background: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			padding: 12px 20px;
+			font-size: 14px;
+			text-align: center;
 		}
 
 		.flyout-panel {
@@ -49,7 +69,7 @@
 			border: 1px solid #ccc;
 			border-radius: 4px;
 			box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-			padding: 12px 16px;
+			padding: 8px 16px;
 			min-width: 160px;
 			font-size: 14px;
 		}
@@ -63,98 +83,331 @@
 			margin: 4px 0;
 		}
 	</style>
+	<script>
+		function setAllHover() {
+			document.querySelectorAll('nz-flyout').forEach(flyout => {
+				flyout.setAttribute('flyout-on', 'hover');
+			});
+			document.getElementById('actionType').textContent = 'Hover';
+		}
+	</script>
+	<script>
+		function setAllClick() {
+			document.querySelectorAll('nz-flyout').forEach(flyout => {
+				flyout.setAttribute('flyout-on', 'click');
+			});
+			document.getElementById('actionType').textContent = 'Click';
+		}
+	</script>
 </head>
 <body>
 
 	<h1 style="margin:0">nz-flyout — Live Tests</h1>
 
-	<!-- Example 1: Click, flyout below-left aligned to anchor -->
 	<section>
-		<h2>1. Click — flyout top-left aligns to anchor bottom-left</h2>
-		<div class="demo-row">
-			<span class="flyout-anchor">
-				<button>Open Menu (click)</button>
-				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
-					<div class="flyout-panel">
-						<ul>
-							<li>Item One</li>
-							<li>Item Two</li>
-							<li>Item Three</li>
-						</ul>
-					</div>
-				</nz-flyout>
-			</span>
+		<div class="examples-row">
+			<div></div>
+			<h2>Test Controls</h2>
+			<div></div>
+		</div>
+		<div class="examples-row">
+			<div></div>
+			<h2>Currently set:&nbsp;&nbsp;<span id="actionType">Click</span></h2>
+			<div></div>
+		</div>
+		<div class="examples-row">
+			<div></div>
+			<div>
+				<button onclick="setAllClick()">Set All Tests to onClick</button>
+			</div>
+			<div>
+				<button onclick="setAllHover()">Set All Tests to onHover</button>
+			</div>
+			<div></div>
 		</div>
 	</section>
-
-	<!-- Example 2: Hover, flyout below-center aligned to anchor -->
-	<section>
-		<h2>2. Hover — flyout top-center aligns to anchor bottom-center</h2>
-		<div class="demo-row">
-			<span class="flyout-anchor">
-				<button>Hover Me</button>
-				<nz-flyout flyout-on="hover" align-my="top center" align-to="bottom center">
-					<div class="flyout-panel">
-						Tooltip content here.
-					</div>
-				</nz-flyout>
-			</span>
+	<section>`
+		<div class="examples-row">
+			<div></div>
+			<h2>Click — flyout examples</h2>
+			<div></div>
 		</div>
-	</section>
-
-	<!-- Example 3: Click, flyout to the right of the button -->
-	<section>
-		<h2>3. Click — flyout left-top aligns to anchor right-top</h2>
-		<div class="demo-row">
-			<span class="flyout-anchor">
-				<button>Open Right Panel (click)</button>
-				<nz-flyout flyout-on="click" align-my="top left" align-to="top right">
-					<div class="flyout-panel">
-						<strong>Side Panel</strong>
-						<p style="margin:8px 0 0">Content to the right.</p>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Cournered Up Left</div>
 					</div>
-				</nz-flyout>
-			</span>
-		</div>
-	</section>
-
-	<!-- Example 4: Hover, flyout above the button -->
-	<section>
-		<h2>4. Hover — flyout bottom-center aligns to anchor top-center</h2>
-		<div class="demo-row">
-			<span class="flyout-anchor">
-				<button>Hover for Tooltip Above</button>
-				<nz-flyout flyout-on="hover" align-my="bottom center" align-to="top center">
-					<div class="flyout-panel">
-						I appear above.
+					<nz-flyout flyout-on="click" align-my="bottom right" align-to="top left">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="bottom right"</code></div>
+							<div><code>align-to="top left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Cournered Up Right</div>
 					</div>
-				</nz-flyout>
-			</span>
+					<nz-flyout flyout-on="click" align-my="bottom left" align-to="top right">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="bottom left"</code></div>
+							<div><code>align-to="top right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
 		</div>
-	</section>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Cournered Down Right</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top right" align-to="bottom left">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="top right"</code></div>
+							<div><code>align-to="bottom left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Cournered Down Left</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top left" align-to="bottom right">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="top left"</code></div>
+							<div><code>align-to="bottom right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+		
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Left side top aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top right" align-to="top left">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="top right"</code></div>
+							<div><code>align-to="top left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Right side top aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top left" align-to="top right">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="top left"</code></div>
+							<div><code>align-to="top right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
 
-	<!-- Example 5: Click, multiple flyouts on the page independently -->
-	<section>
-		<h2>5. Multiple independent flyouts</h2>
-		<div class="demo-row">
-			<span class="flyout-anchor">
-				<button>Menu A (click)</button>
-				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
-					<div class="flyout-panel">Menu A content</div>
-				</nz-flyout>
-			</span>
-			<span class="flyout-anchor">
-				<button>Menu B (click)</button>
-				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
-					<div class="flyout-panel">Menu B content</div>
-				</nz-flyout>
-			</span>
-			<span class="flyout-anchor">
-				<button>Menu C (click)</button>
-				<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
-					<div class="flyout-panel">Menu C content</div>
-				</nz-flyout>
-			</span>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Left side center aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="center right" align-to="center left">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="center right"</code></div>
+							<div><code>align-to="center left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Right side center aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="center left" align-to="center right">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="center left"</code></div>
+							<div><code>align-to="center right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+		
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Left side bottom aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="bottom right" align-to="bottom left">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="bottom right"</code></div>
+							<div><code>align-to="bottom left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Right side bottom aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="bottom left" align-to="bottom right">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="bottom left"</code></div>
+							<div><code>align-to="bottom right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Top side right aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="bottom right" align-to="top right">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="bottom right"</code></div>
+							<div><code>align-to="top right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Top side left aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="bottom left" align-to="top left">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="bottom left"</code></div>
+							<div><code>align-to="top left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Bottom side right aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top right" align-to="bottom right">
+						<div class="flyout-panel">
+							<div>On your left</div>
+							<div><code>align-my="top right"</code></div>
+							<div><code>align-to="bottom right"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Bottom side left aligned</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top left" align-to="bottom left">
+						<div class="flyout-panel">
+							<div>On your right</div>
+							<div><code>align-my="top left"</code></div>
+							<div><code>align-to="bottom left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Zig</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="bottom center" align-to="top center">
+						<div class="flyout-panel">
+							<div>Above you</div>
+							<div><code>align-my="bottom center"</code></div>
+							<div><code>align-to="top center"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Zag</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top center" align-to="bottom center">
+						<div class="flyout-panel">
+							<div>Below you</div>
+							<div><code>align-my="top center"</code></div>
+							<div><code>align-to="bottom center"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
 		</div>
 	</section>
 
