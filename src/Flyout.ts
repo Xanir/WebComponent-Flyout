@@ -16,7 +16,7 @@ class Flyout implements IFlyout {
 	#isActivatedOnClick: boolean = false;
 	#isActivatedOnHover: boolean = false;
 
-	#pendingRenderActions: number[] = [];
+	#rAFdisplayFlyout: number = 0;
 
 	constructor(flyoutElem: HTMLElement) {
 		if (!flyoutElem || !(flyoutElem instanceof HTMLElement)) {
@@ -96,18 +96,8 @@ class Flyout implements IFlyout {
 		return !!this.#flyoutContainer;
 	}
 
-	#clearTimers(): void {
-        while (this.#pendingRenderActions.length) {
-            const action = this.#pendingRenderActions.pop();
-            if (action !== undefined) {
-                window.cancelAnimationFrame(action);
-            }
-        }
-	}
-
 	close(): void {
 		this.#eventBinder.unbindAll();
-		this.#clearTimers();
 		this.#flyoutContainer?.remove();
 		this.#flyoutContainer = null;
 	}
@@ -161,13 +151,11 @@ class Flyout implements IFlyout {
 			return;
 		}
 
-		this.#clearTimers();
-		this.#pendingRenderActions.push(window.requestAnimationFrame(() => {
-			this.#initFlyoutContainer();
-			this.#pendingRenderActions.push(window.requestAnimationFrame(() => {
-				this.#applyPositioning(flyoutAlignedToElem);
-			}));
-		}));
+		window.cancelAnimationFrame(this.#rAFdisplayFlyout);
+		this.#initFlyoutContainer();
+		this.#rAFdisplayFlyout = window.requestAnimationFrame(() => {
+			this.#applyPositioning(flyoutAlignedToElem);
+		});
 	}
 }
 
