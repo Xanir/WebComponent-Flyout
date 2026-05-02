@@ -42,6 +42,7 @@
 			display: flex;
 			justify-items: center;
 			margin: 30px 0;
+			width: 100%;
 		}
 		.examples-row > *:first-child {
 			flex: 0 0 20%;
@@ -417,6 +418,71 @@
 							<div>Below you</div>
 							<div><code>align-my="top center"</code></div>
 							<div><code>align-to="bottom center"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="examples-row">
+			<div></div>
+			<h2>flyout examples using margins on the flyout content to add space between the flyout and its anchor</h2>
+			<div></div>
+		</div>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Horizontal Margins</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="center right" align-to="center left">
+						<div class="flyout-panel" style="margin: 0 40px;">
+							<div>margin: 0 40px;</div>
+							<div><code>align-my="center right"</code></div>
+							<div><code>align-to="center left"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>Vertical Margins</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top center" align-to="bottom center">
+						<div class="flyout-panel" style="margin: 40px 0;">
+							<div>margin: 40px 0;</div>
+							<div><code>align-my="top center"</code></div>
+							<div><code>align-to="bottom center"</code></div>
+						</div>
+					</nz-flyout>
+				</div>
+			</div>
+			<div>
+			</div>
+		</div>
+		<div class="examples-row">
+			<div>
+			</div>
+			<div>
+				<div class="clickable">
+					<div>
+						<div>
+							<div>Full Margins</div>
+							<div>angled flyout</div>
+						</div>
+					</div>
+					<nz-flyout flyout-on="click" align-my="top right" align-to="bottom left">
+						<div class="flyout-panel" style="margin: 20px;">
+							<div>margin: 20px;</div>
+							<div><code>align-my="top right"</code></div>
+							<div><code>align-to="bottom left"</code></div>
 						</div>
 					</nz-flyout>
 				</div>
